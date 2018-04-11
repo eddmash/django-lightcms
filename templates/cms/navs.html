@@ -1,0 +1,36 @@
+{% for page in pages %}
+
+    <li class="dropdown yamm-fw">
+        <a href="{{ domain }}{{ page.slug }}"
+                {% if page.has_submenu %} class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown"
+           data-delay="200" {% endif %}>
+            {{ page.title|title }}
+            {% if  page.has_submenu %}
+                <b class="caret"></b>
+            {% endif %}
+        </a>
+        {% if  page.has_submenu %}
+            <ul class="dropdown-menu">
+                <li>
+                    <div class="yamm-content">
+                        <div class="row">
+                            <div class="col-sm-3">
+                                {% for child in page.page_set.all %}
+                                    <ul>
+                                        <li>
+                                            <a href="{{ domain }}{{ child.slug }}">{{ child.name|title }}</a>
+                                        </li>
+
+                                    </ul>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.yamm-content -->
+                </li>
+
+            </ul>
+        {% endif %}
+
+    </li>
+{% endfor %}

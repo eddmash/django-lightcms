@@ -1,0 +1,70 @@
+{% extends "inventory/base.html" %}
+{% load i18n uploader_tags %}
+
+{% block page_heading %}
+    {% if page %}
+        {% trans "Update" %}
+    {% else %}
+        {% trans "Create" %}
+    {% endif %}
+    <small>Page</small>
+{% endblock page_heading %}
+
+{% block content %}
+
+    <form class="" method="post" enctype="multipart/form-data" novalidate>
+        {% if form.errors %}
+            <div class="box box-default">
+                <div class="box-body">
+                    <!--:::::::::::::::::::::::::::::: Errors ::::::::::::::::::::::::::::::::::::: -->
+                    <div class="form-group">
+
+                        <div class="alert alert-info ">
+                            {% if form.non_field_errors %}
+                                <dl class="dl-horizontal">
+                                    <dd>{{ form.non_field_errors }}</dd>
+                                </dl>
+                            {% endif %}
+
+                            {% for field in form %}
+                                {% for error in field.errors %}
+                                    <dl class="dl-horizontal">
+                                        <dt>{{ field.label }}</dt>
+                                        <dd>{{ error }}</dd>
+                                    </dl>
+                                {% endfor %}
+                            {% endfor %}
+                        </div>
+                        <input type="hidden" value="{{ user }}" name="current_logged_in_user"/>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+        {% csrf_token %}
+        <div class="row">
+            <div class="col-sm-8">
+                <div class="box box-default">
+                    <div class="box-body">
+                        {% include "cms/_form_field.html" with field=form.title only %}
+                        {% include "cms/_form_field.html" with field=form.content only %}
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="box box-default">
+                    <div class="box-body">
+                        {% include "cms/_form_field.html" with field=form.publish only %}
+                        {% include "cms/_form_field.html" with field=form.parent only %}
+                        <div class="form-group">
+                            <div class="col-sm-12">
+                                <button type="submit" class="btn btn-primary">{% trans "Save" %}</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </form>
+    </div>
+{% endblock content %}

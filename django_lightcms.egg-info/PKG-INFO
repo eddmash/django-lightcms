@@ -1,0 +1,15 @@
+Metadata-Version: 1.0
+Name: django-lightcms
+Version: 0.1
+Summary: A cms for developers.
+Home-page: https://github.com/eddmash/django-lightcms
+Author: Eddilbert Macharia
+Author-email: edd.cowan@gmail.com
+License: BSD License
+Description: A Cms for Developers
+        ====================
+        
+        This a very basic cms to incoporate in your project.
+        
+        The main reason for this to avoid those static page contents like about us, on the app.
+Platform: UNKNOWN

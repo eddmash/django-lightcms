@@ -4,7 +4,7 @@ from django.db.models import Prefetch
 from django.urls import reverse_lazy
 from django.utils.translation import gettext_lazy as __
 
-from errand import fields
+from . import fields
 
 PAGE_TYPE = "PAGE"
 PUBLISH = "PUBLISH"

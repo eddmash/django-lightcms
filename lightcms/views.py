@@ -3,16 +3,14 @@ from django.shortcuts import render
 # Create your views here.
 from django.urls import reverse_lazy
 from django.views import generic
-from cms import forms
-from errand import helpers
+from . import forms
 from . import models
 
 
-class PageCreateView(helpers.AdminMixin, generic.CreateView):
+class PageCreateView(generic.CreateView):
     model = models.Page
-    template_name = "cms/page/create.html"
+    template_name = "lightcms/page/create.html"
     form_class = forms.CreatePageForm
-    back_url = reverse_lazy("cms:pages")
 
     def form_valid(self, form):
         form.instance.author = self.request.user
@@ -20,18 +18,16 @@ class PageCreateView(helpers.AdminMixin, generic.CreateView):
         return super(PageCreateView, self).form_valid(form)
 
 
-class PageUpdateView(helpers.AdminMixin, generic.UpdateView):
+class PageUpdateView(generic.UpdateView):
     model = models.Page
-    template_name = "cms/page/create.html"
+    template_name = "lightcms/page/create.html"
     form_class = forms.CreatePageForm
-    success_url = back_url = reverse_lazy("cms:pages")
 
     def form_valid(self, form):
         form.instance.modified_by = self.request.user
         return super(PageUpdateView, self).form_valid(form)
 
 
-class PageListView(helpers.AdminMixin, generic.ListView):
+class PageListView(generic.ListView):
     model = models.Page
-    back_url = reverse_lazy("inventory:home")
-    template_name = "cms/page/list.html"
+    template_name = "lightcms/page/list.html"

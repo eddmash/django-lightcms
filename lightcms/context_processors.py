@@ -1,4 +1,4 @@
-from cms.models import Page
+from lightcms.models import Page
 
 
 def menu_pages(request):

@@ -1,7 +1,7 @@
 {% for page in pages %}
 
     <li class="dropdown yamm-fw">
-        <a href="{{ domain }}{{ page.slug }}"
+        <a href="{% cms_page_url page domain %}"
                 {% if page.has_submenu %} class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown"
            data-delay="200" {% endif %}>
             {{ page.title|title }}

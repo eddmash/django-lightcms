@@ -35,13 +35,13 @@ class Page(models.Model):
     def __str__(self):
         return self.title
 
-    def get_absolute_url(self):
-        return reverse_lazy("cms:page-edit", args=[str(self.slug)])
-
     def has_submenu(self):
         return self.page_set.exists()
 
     @classmethod
     def get_menu_pages(cls):
-        return cls.objects.filter(publish=PUBLISH, parent__isnull=True).order_by('order').prefetch_related(
-            Prefetch('page_set', queryset=cls.objects.filter(publish=PUBLISH, parent__isnull=False).order_by('order')))
+        return cls.objects.filter(publish=PUBLISH, parent__isnull=True) \
+            .order_by('order') \
+            .prefetch_related(Prefetch('page_set',
+                                       queryset=cls.objects.filter(publish=PUBLISH, parent__isnull=False)
+                                       .order_by('order')))

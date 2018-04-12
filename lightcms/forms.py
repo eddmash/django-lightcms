@@ -1,11 +1,10 @@
 from django import forms
-from cms import models
-from errand import helpers
+from . import models
 
 __author__ = 'eddmash'
 
 
-class CreatePageForm(helpers.BootstrapFormMixin, forms.ModelForm):
+class CreatePageForm(forms.ModelForm):
     class Meta:
         model = models.Page
         fields = ['title', 'content', 'publish', 'parent', 'order']

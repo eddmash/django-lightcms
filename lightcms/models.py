@@ -38,6 +38,9 @@ class Page(models.Model):
     def has_submenu(self):
         return self.page_set.exists()
 
+    def title_text(self):
+        return self.page_set.exists()
+
     @classmethod
     def get_menu_pages(cls):
         return cls.objects.filter(publish=PUBLISH, parent__isnull=True) \

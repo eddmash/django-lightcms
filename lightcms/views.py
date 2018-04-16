@@ -31,3 +31,10 @@ class PageUpdateView(generic.UpdateView):
 class PageListView(generic.ListView):
     model = models.Page
     template_name = "lightcms/page/list.html"
+
+    def get_queryset(self):
+        self.queryset = self.model.objects.select_related('parent')
+        return super().get_queryset()
+
+
+

@@ -1,7 +1,8 @@
+from django import forms
 from django.core import checks
 from django.db import models
 from django.utils.text import slugify
-
+from . import helper
 
 class SlugField(models.SlugField):
     """A slug that takes an attribute to use to generate a slug"""
@@ -48,3 +49,8 @@ class SlugField(models.SlugField):
             return value
         else:
             return super(SlugField, self).pre_save(model_instance, add)
+
+class ModelChoiceField(forms.ModelChoiceField):
+
+    def label_from_instance(self, obj):
+        return helper.page_breadcrumb(obj)
